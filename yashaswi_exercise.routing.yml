@@ -1,0 +1,25 @@
+yashaswi_exercise.controller: #machine name
+  path: '/controller-exercise'  #giving path to CustomController.php
+  defaults:
+    _controller: '\Drupal\yashaswi_exercise\Controller\CustomController::exercise' #path and function name is defined here
+    _title: 'Exercise' #title given for controller.php
+  requirements:
+    _permission: 'controller permission' #permission created for controller
+
+yashaswi_exercise.custom_form: #machine name
+  path: '/custom-form-exercise' #giving path to CustomForm.php
+  defaults:
+    _form: '\Drupal\yashaswi_exercise\Form\CustomForm' #defining the path
+    _title: 'custom user details ' #title given for customform
+  requirements:
+    _permission: 'access content' #permission to access published content
+
+yashaswi_exercise.config_form:
+  path: '/config-form-exercise' #giving path to Configform.php
+  defaults:
+    _form: '\Drupal\yashaswi_exercise\Form\ConfigForm' #defining the path
+    _title: 'config user details' #title given for config form
+  requirements:
+    _permission: 'config form permission' #created new pemission with admin route enabled
+  options:
+    _admin_route: TRUE

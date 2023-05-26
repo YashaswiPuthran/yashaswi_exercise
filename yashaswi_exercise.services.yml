@@ -1,0 +1,9 @@
+services: #creating a service in this yml
+  custom_service:
+    class : Drupal\yashaswi_exercise\CustomService
+    arguments: ['@config.factory']
+
+  custom_events_user_login:
+    class: '\Drupal\yashaswi_exercise\EventSubscriber\UserLoginSubscriber'
+    tags:
+      - { name: 'event_subscriber' }

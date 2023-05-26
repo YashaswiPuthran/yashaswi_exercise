@@ -1,0 +1,5 @@
+add_content.config:
+  route_name: "yashaswi_exercise.config_form" #directs us to the config form page
+  title: "Go to Configform" #title of the button
+  appears_on:
+    - "yashaswi_exercise.custom_form" #this button is available on the custom form page

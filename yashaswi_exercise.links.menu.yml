@@ -1,0 +1,5 @@
+example.admin:
+  title: 'controller' #name for the menu
+  description: 'menu to controller' #desc for the menu
+  route_name: 'yashaswi_exercise.controller' #this menu directs us to controller page
+  parent: system.admin #it comes under the admin menu which is the parent menu

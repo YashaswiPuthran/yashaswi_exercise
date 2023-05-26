@@ -1,0 +1,3 @@
+config form permission: #created permission for config form
+  title: Config Form Permission #title of the permission
+  description: description for config form permission #descripton for the permission

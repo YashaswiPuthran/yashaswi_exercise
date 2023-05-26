@@ -1,0 +1,5 @@
+name: 'Yashaswi Exercise' # name of the custom module we created
+description: 'Exercise module' #desc for the module
+type: module #type of the custom we are creating (profile or modules etc)
+core_version_requirement: ^9 || ^10 #version this module will be compatible with
+version: 9.x-1.0
