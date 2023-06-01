@@ -27,3 +27,23 @@ function yashaswi_exercise_theme($existing, $type, $theme, $path) {
  }
 
 
+ function yashaswi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  //$route = \Drupal::routeMatch()->getRouteName();
+ // print_r($route);
+ // exit;
+    if ($form_id == "node_page_form" || $form_id == "node_page_edit_form") {
+
+    //print_r(($form['field_list_field']));
+    $form['field_list_field']['widget']['#title']="altered text";
+    //print_r($form['field_list_field']);
+     unset($form['field_list_field']['widget']['#options'][1]);
+   // print_r($form['field_list_field']['widget']);
+
+   $form['field_list_field']['widget']['#default_value']=[2];
+    $form['field_list_field']['widget']['#description']="description";
+
+   //exit;
+
+    }
+}
+

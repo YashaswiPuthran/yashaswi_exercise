@@ -33,8 +33,8 @@ class UserLoginSubscriber implements EventSubscriberInterface {
     $dateFormatter = \Drupal::service('date.formatter');
 
     $account_created = $database->select('users_field_data', 'ud')
-      ->fields('ud', ['created'])
-      ->condition('ud.uid', $event->account->id())
+      ->fields('ud', ['created']) # created fields and the date
+      ->condition('ud.uid', $event->account->id()) #condition based on account id
       ->execute()
       ->fetchField();
 
