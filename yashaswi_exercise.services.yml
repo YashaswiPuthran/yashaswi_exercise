@@ -7,3 +7,10 @@ services: #creating a service in this yml
     class: '\Drupal\yashaswi_exercise\EventSubscriber\UserLoginSubscriber'
     tags:
       - { name: 'event_subscriber' }
+
+
+    custom_drush.command:
+    class: \Drupal\custom_drush\Commands\DrushTask
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: drush.command }
