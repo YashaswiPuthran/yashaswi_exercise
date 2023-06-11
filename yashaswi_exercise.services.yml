@@ -9,8 +9,8 @@ services: #creating a service in this yml
       - { name: 'event_subscriber' }
 
 
-    custom_drush.command:
-    class: \Drupal\custom_drush\Commands\DrushTask
+  custom_drush.command:
+    class: Drupal\yashaswi_exercise\Commands\DrushTask
     arguments: ['@entity_type.manager']
     tags:
       - { name: drush.command }

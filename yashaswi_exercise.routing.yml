@@ -24,10 +24,10 @@ yashaswi_exercise.config_form:
   options:
     _admin_route: TRUE
 
-  dependent.form:
+yashaswi_exercise.form:
   path: '/dropdown'
   defaults:
-    _form: '\Drupal\dependent\Form\DependentDropdownForm'
+    _form: '\Drupal\yashaswi_exercise\Form\DependentDropdownForm'
     _title: 'Dependent Dropdown'
   requirements:
     _permission: 'access content'

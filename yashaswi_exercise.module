@@ -1,49 +1,39 @@
 <?php
+
+/**
+ * @file
+ * This is a short desc.
+ */
+
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * implements hook_form_alter
+ * Implements hook_form_alter().
  */
+function yashaswi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Gets called whenever form is opened.
+  // Calling service to call getName func from CustomService.php.
+  $data = \Drupal::service('custom_service')->getName();
+  // Prints the value provided in the config form.
+  print_r($data);
+}
 
- function yashaswi_exercise_form_alter(&$form,FormStateInterface $form_state, $form_id) { #gets called whenever form is opened
-    $data = \Drupal::service('custom_service')->getName(); #calling service to call getName func from CustomService.php
-    print_r($data); #prints the value provided in the config form
-  }
-
- /**
+/**
  * Implements hook_theme().
  */
 function yashaswi_exercise_theme($existing, $type, $theme, $path) {
 
-    return [
-       'controller_template' => [ #name for the template file (html.twig)
-           'variables' => [ #defined variables to be returned
-                'markup' => "", #can provide default value for markup here
-                'hexcode'=> "", #can prove default value for hexcode here
-            ],
-       ],
-   ];
+  return [
+  // Name for the template file (html.twig)
+    'controller_template' => [
+  // Defined variables to be returned.
+      'variables' => [
+  // Can provide default value for markup here.
+        'markup' => "",
+  // Can prove default value for hexcode here.
+        'hexcode' => "",
+      ],
+    ],
+  ];
 
- }
-
-
-//  function yashaswi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-//   //$route = \Drupal::routeMatch()->getRouteName();
-//  // print_r($route);
-//  // exit;
-//     if ($form_id == "node_page_form" || $form_id == "node_page_edit_form") {
-
-//     //print_r(($form['field_list_field']));
-//     $form['field_list_field']['widget']['#title']="altered text";
-//     //print_r($form['field_list_field']);
-//      unset($form['field_list_field']['widget']['#options'][1]);
-//    // print_r($form['field_list_field']['widget']);
-
-//    $form['field_list_field']['widget']['#default_value']=[2];
-//     $form['field_list_field']['widget']['#description']="description";
-
-//    //exit;
-
-//     }
-// }
-
+}

@@ -5,11 +5,12 @@ namespace Drupal\yashaswi_exercise;
 use Drupal\Core\Config\ConfigFactory;
 
 /**
- * Class CustomService.
+ * This is for custom service.
  *
  * @package Drupal\yashaswi_exercise\Services
  */
-class CustomService { #creating a service
+class CustomService {
+  // Creating a service.
 
   /**
    * Configuration Factory.
@@ -21,14 +22,16 @@ class CustomService { #creating a service
   /**
    * Constructor.
    */
-  public function __construct(ConfigFactory $configFactory) { #this function gets called first
+  public function __construct(ConfigFactory $configFactory) {
+    // This function gets called first.
     $this->configFactory = $configFactory;
   }
 
   /**
    * Gets my setting.
    */
-  public function getName() { # function that takes the value of username and returns it
+  public function getName() {
+    // Function that takes the value of username and returns it.
     $config = $this->configFactory->get('yashaswi_exercise.settings');
     return $config->get('username');
   }

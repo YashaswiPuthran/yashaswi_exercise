@@ -1,11 +1,8 @@
 <?php
 
-
 namespace Drupal\yashaswi_exercise\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormInterface;
-use Drupal\custom_task\Form\CustomForm;
 
 /**
  * Provides a 'Custom' block.
@@ -22,8 +19,10 @@ class CustomBlock extends BlockBase {
    */
   public function build() {
 
-    $form = \Drupal::formBuilder()->getForm('Drupal\yashaswi_exercise\Form\CustomForm'); # rendered a custom form using the formbuilder() inside the block build function
+    // Rendered a custom form inside the block build function.
+    $form = \Drupal::formBuilder()->getForm('Drupal\yashaswi_exercise\Form\CustomForm');
 
     return $form;
-   }
+  }
+
 }

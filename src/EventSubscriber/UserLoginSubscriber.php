@@ -6,7 +6,7 @@ use Drupal\yashaswi_exercise\Event\UserLoginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Class UserLoginSubscriber.
+ * This is for login subscriber.
  *
  * @package Drupal\yashaswi_exercise\EventSubscriber
  */
@@ -33,8 +33,10 @@ class UserLoginSubscriber implements EventSubscriberInterface {
     $dateFormatter = \Drupal::service('date.formatter');
 
     $account_created = $database->select('users_field_data', 'ud')
-      ->fields('ud', ['created']) # created fields and the date
-      ->condition('ud.uid', $event->account->id()) #condition based on account id
+    // Created fields and the date.
+      ->fields('ud', ['created'])
+    // Condition based on account id.
+      ->condition('ud.uid', $event->account->id())
       ->execute()
       ->fetchField();
 

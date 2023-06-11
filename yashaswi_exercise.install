@@ -1,44 +1,56 @@
 <?php
-// update => module reinstallation not required.
+
 /**
- * implements hook_schema().
+ * @file
+ * Update => module reinstallation not required.
  */
 
-function yashaswi_exercise_general_schema() {  #creates a table structure in the database
-    $schema['user_details'] = [ #name of the schema is user-details
-        'description' => 'Stores user details', #desc fo the table
-        'fields' => [
-            'id' => [
-                'description' => 'serial number', #first field which is auto increment and not null
-                'type' => 'serial',
-                'not null' => true
-            ],
-            'username' => [ #fields same as the fields in custom form so that the data from custom form is inseerted into this table
-                'description' => 'Firstname of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-            'name' => [ #fields same as the fields in custom form so that the data from custom form is inseerted into this table
-                'description' => 'Last Name of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-            'email' => [ #fields same as the fields in custom form so that the data from custom form is inseerted into this table
-                'description' => 'Email of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-            'age' => [ #fields same as the fields in custom form so that the data from custom form is inseerted into this table
-                'description' => 'age of the user',
-                'type' => 'varchar',
-                'length' => 60,
-                'not null' => true,
-            ],
-        ],
-        'primary key' => ['id'],
-    ];
-    return $schema;
+/**
+ * Implements hook_schema().
+ */
+function yashaswi_exercise_general_schema() {
+  // Creates a table structure in the database.
+  // Name of the schema is user-details.
+  $schema['user_details'] = [
+  // Desc fo the table.
+    'description' => 'Stores user details',
+    'fields' => [
+      'id' => [
+  // First field which is auto increment and not null.
+        'description' => 'serial number',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'username' => [
+        'description' => 'Firstname of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'name' => [
+        'description' => 'Last Name of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'email' => [
+        'description' => 'Email of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+      // Fields same as the fields in custom form.
+      'age' => [
+        'description' => 'age of the user',
+        'type' => 'varchar',
+        'length' => 60,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
 }
