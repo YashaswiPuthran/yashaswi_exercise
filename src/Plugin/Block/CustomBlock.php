@@ -9,7 +9,7 @@ use Drupal\Core\Block\BlockBase;
  *
  * @Block(
  *   id = "custom_task",
- *   admin_label = "Yashaswi block", # providing label to the block
+ *   admin_label = "Yashaswi block",
  * )
  */
 class CustomBlock extends BlockBase {

@@ -1,0 +1,15 @@
+dependent.form:
+  path: '/dropdown'
+  defaults:
+    _form: '\Drupal\dependent\Form\DependentDropdownForm'
+    _title: 'Dependent Dropdown'
+  requirements:
+    _permission: 'access content'
+
+dependentdrop.form:
+  path: '/dependentform'
+  defaults:
+    _form: '\Drupal\dependent\Form\DependentForm'
+    _title: 'Dependent Dropdown'
+  requirements:
+    _permission: 'access content'

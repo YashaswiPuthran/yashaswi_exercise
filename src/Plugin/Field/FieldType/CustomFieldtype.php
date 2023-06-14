@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\custom_field\Plugin\Field\FieldType;
+namespace Drupal\yashaswi_exercise\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;

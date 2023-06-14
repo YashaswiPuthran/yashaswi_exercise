@@ -8,7 +8,7 @@
 /**
  * Implements hook_schema().
  */
-function yashaswi_exercise_general_schema() {
+function yashaswi_exercise_schema() {
   // Creates a table structure in the database.
   // Name of the schema is user-details.
   $schema['user_details'] = [
@@ -53,4 +53,51 @@ function yashaswi_exercise_general_schema() {
     'primary key' => ['id'],
   ];
   return $schema;
+}
+
+/**
+ * Function.
+ */
+function yashaswi_exercise_update_100301() {
+  $config = \Drupal::configFactory()->getEditable('yashaswi_exercise.settings');
+  $config->set('name', 'YASHASWI');
+  $config->save();
+}
+
+/**
+ * Function.
+ */
+function yashaswi_exercise_update_100302() {
+  $config = \Drupal::configFactory()->getEditable('yashaswi_exercise.settings');
+  $config->set('email', 'shank@123.com');
+  $config->save();
+}
+
+/**
+ * Function.
+ */
+function yashaswi_exercise_update_100303() {
+  $config = \Drupal::configFactory()->getEditable('yashaswi_exercise.settings');
+  $config->set('email', 'yash@gmail.com');
+  $config->save();
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function yashaswi_exercise_update_100305() {
+  // Load all article nodes.
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(TRUE)
+    ->condition('type', 'page');
+  $nids = $query->execute();
+
+  $nodes = Node::loadMultiple($nids);
+
+  foreach ($nodes as $node) {
+    $node->set("field_email", "yash@gmail.com");
+    $node->save();
+  }
+  \Drupal::messenger()->addMessage('Nodes updated');
+
 }
