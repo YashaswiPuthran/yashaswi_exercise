@@ -1,16 +1,18 @@
 <?php
 
-use Drupal\Core\Database\Database;
+/**
+ * @file
+ * Update => module reinstallation not required.
+ */
 
 /**
  * Implements hook_update_N().
  */
-
- function dependent_update_95809() {
+function dependent_update_95809() {
   $database = \Drupal::database();
   $schema = $database->schema();
 
-  // Create the country table
+  // Create the country table.
   $country_table_name = 'country';
   $country_table_schema = [
     'fields' => [
