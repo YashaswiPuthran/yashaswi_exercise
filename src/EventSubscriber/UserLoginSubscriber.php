@@ -2,6 +2,7 @@
 
 namespace Drupal\yashaswi_exercise\EventSubscriber;
 
+use Drupal\Core\Database\Connection;
 use Drupal\yashaswi_exercise\Event\UserLoginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -13,11 +14,27 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class UserLoginSubscriber implements EventSubscriberInterface {
 
   /**
+   * The database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * UserLoginSubscriber constructor.
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
     return [
-      // Static class constant => method on this class.
       UserLoginEvent::EVENT_NAME => 'onUserLogin',
     ];
   }
@@ -29,13 +46,10 @@ class UserLoginSubscriber implements EventSubscriberInterface {
    *   Our custom event object.
    */
   public function onUserLogin(UserLoginEvent $event) {
-    $database = \Drupal::database();
     $dateFormatter = \Drupal::service('date.formatter');
 
-    $account_created = $database->select('users_field_data', 'ud')
-    // Created fields and the date.
+    $account_created = $this->database->select('users_field_data', 'ud')
       ->fields('ud', ['created'])
-    // Condition based on account id.
       ->condition('ud.uid', $event->account->id())
       ->execute()
       ->fetchField();

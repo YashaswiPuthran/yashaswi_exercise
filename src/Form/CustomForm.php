@@ -4,24 +4,49 @@ namespace Drupal\yashaswi_exercise\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * For custom form.
  */
 class CustomForm extends FormBase {
-  // It has submit form.
 
   /**
-   * Generated form id.
+   * The database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * CustomForm constructor.
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function getFormId() {
-    // To get the form id.
-    // Form id.
     return 'custom_form_get_user_details';
   }
 
   /**
-   * Build form generates form.
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Building form by adding the required fields.
@@ -54,19 +79,19 @@ class CustomForm extends FormBase {
       '#type' => 'submit',
       '#value' => 'Submit',
     ];
-    // This will display the form with fields.
+
     return $form;
   }
 
   /**
-   * Submit form.
+   * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Submitting the form.
     // Using messenger service to display the submitted message.
     \Drupal::messenger()->addMessage("User Details Submitted Successfully");
     // To insert values into the database.
-    \Drupal::database()->insert("user_details")->fields([
+    $this->database->insert("user_details")->fields([
       'username' => $form_state->getValue("username"),
       'name' => $form_state->getValue("name"),
       'email' => $form_state->getValue("email"),

@@ -69,7 +69,7 @@ function yashaswi_exercise_update_100301() {
  */
 function yashaswi_exercise_update_100302() {
   $config = \Drupal::configFactory()->getEditable('yashaswi_exercise.settings');
-  $config->set('email', 'shank@123.com');
+  $config->set('email', 'yash@gmail.com');
   $config->save();
 }
 

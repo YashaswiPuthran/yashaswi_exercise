@@ -8,29 +8,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a 'Custom' block.
- *
- * @Block(
- *   id = "custom_task",
- *   admin_label = "Yashaswi block",
- * )
- */
-// class CustomBlock extends BlockBase {
-
-//   /**
-//    * {@inheritdoc}
-//    */
-//   public function build() {
-
-//     // Rendered a custom form inside the block build function.
-//     $form = \Drupal::formBuilder()->getForm('Drupal\yashaswi_exercise\Form\CustomForm');
-
-//     return $form;
-//   }
-
-// }
-
-/**
  * Provides a custom block form.
  *
  * @Block(
@@ -38,8 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   admin_label = @Translation("Custom Block Form"),
  * )
  */
-class CustomBlock extends BlockBase implements ContainerFactoryPluginInterface
-{
+class CustomBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * The form builder.
@@ -60,8 +36,7 @@ class CustomBlock extends BlockBase implements ContainerFactoryPluginInterface
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The form builder.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder)
-  {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->formBuilder = $form_builder;
   }
@@ -69,8 +44,7 @@ class CustomBlock extends BlockBase implements ContainerFactoryPluginInterface
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition)
-  {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
       $plugin_id,
@@ -82,8 +56,7 @@ class CustomBlock extends BlockBase implements ContainerFactoryPluginInterface
   /**
    * {@inheritdoc}
    */
-  public function build()
-  {
+  public function build() {
     $form = \Drupal::formBuilder()->getForm('Drupal\yashaswi_exercise\Form\CustomForm');
 
     $rendered_form = \Drupal::service('renderer')->render($form);

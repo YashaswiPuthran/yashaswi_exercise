@@ -2,26 +2,50 @@
 
 namespace Drupal\yashaswi_exercise\Controller;
 
+// Base class for controller.
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\yashaswi_exercise\CustomService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Implements controller.
+ * To include custom_service.
  */
 class CustomController extends ControllerBase {
+  /**
+   * The customservice.
+   *
+   * @var \Drupal\yashaswi_exercise\CustomService
+   */
+  protected $customService;
 
   /**
-   * A controller file.
+   * Dependency injection.
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('custom_service')
+    );
+  }
+
+  /**
+   * Constructor.
+   */
+  public function __construct(CustomService $customService) {
+    $this->customService = $customService;
+  }
+
+  /**
+   * Function demo.
    */
   public function exercise() {
-    // Defined function name exercise.
-    // Calling the service.
-    $data = \Drupal::service('custom_service')->getName();
+    // Defining function.
+    $data = $this->customService->getName();
     return [
-    // Using the templte we created here.
+    // Rendering the template.
       '#theme' => 'controller_template',
-    // Returning the data used in service.
+    // Value is passed.
       '#markup' => $data,
-    // Providing value so that the username displays in red color.
+    // Color.
       '#hexcode' => '#0000FF',
     ];
   }
