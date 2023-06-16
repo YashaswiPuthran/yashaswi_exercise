@@ -1,3 +1,13 @@
-span {
+/* span {
   color: purple;
+} */
+
+header {
+  color: blue;
+}
+span {
+  color: red;
+}
+footer {
+  color: blueviolet;
 }

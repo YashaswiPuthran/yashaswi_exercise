@@ -3,3 +3,11 @@ new_lib: #defined a name for our library
   css:
     theme:
       css/style.css: {} #path where its present
+
+css_lib:
+  version: 1.x
+  css:
+    theme:
+      CSS/style.css: {}
+  js:
+    js/custom.js: {}

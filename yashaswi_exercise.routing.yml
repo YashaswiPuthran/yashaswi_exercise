@@ -31,3 +31,16 @@ yashaswi_exercise.form:
     _title: 'Dependent Dropdown'
   requirements:
     _permission: 'access content'
+
+yashaswi_exercise.title:
+  path: '/node/{node}/title'
+  defaults:
+    _controller: '\Drupal\quick_node_clone\Controller\NewNodeController::getNode'
+    _title_callback: '\Drupal\quick_node_clone\Controller\NewNodeController::getPageTitle'
+  requirements:
+    _custom_access: '\Drupal\quick_node_clone\Controller\NodeAccess::getNode'
+  options:
+    _admin_route: TRUE
+    parameters:
+      node:
+        type: entity:node

@@ -3,6 +3,8 @@
 namespace Drupal\yashaswi_exercise\EventSubscriber;
 
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\yashaswi_exercise\Event\UserLoginEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -21,13 +23,33 @@ class UserLoginSubscriber implements EventSubscriberInterface {
   protected $database;
 
   /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * The date formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
+
+  /**
    * UserLoginSubscriber constructor.
    *
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
+   * @param \Drupal\Core\Datetime\DateFormatterInterface $dateFormatter
+   *   The date formatter service.
    */
-  public function __construct(Connection $database) {
+  public function __construct(Connection $database, MessengerInterface $messenger, DateFormatterInterface $dateFormatter) {
     $this->database = $database;
+    $this->messenger = $messenger;
+    $this->dateFormatter = $dateFormatter;
   }
 
   /**
@@ -46,16 +68,14 @@ class UserLoginSubscriber implements EventSubscriberInterface {
    *   Our custom event object.
    */
   public function onUserLogin(UserLoginEvent $event) {
-    $dateFormatter = \Drupal::service('date.formatter');
-
     $account_created = $this->database->select('users_field_data', 'ud')
       ->fields('ud', ['created'])
       ->condition('ud.uid', $event->account->id())
       ->execute()
       ->fetchField();
 
-    \Drupal::messenger()->addStatus(t('Welcome, your account was created on %created_date.', [
-      '%created_date' => $dateFormatter->format($account_created, 'short'),
+    $this->messenger->addStatus(t('Welcome, your account was created on %created_date.', [
+      '%created_date' => $this->dateFormatter->format($account_created, 'short'),
     ]));
   }
 
