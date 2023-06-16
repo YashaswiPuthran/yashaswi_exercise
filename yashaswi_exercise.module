@@ -8,7 +8,6 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\yashaswi_exercise\Event\UserLoginEvent;
 
-
 /**
  * Implements hook_form_alter().
  */
@@ -45,7 +44,6 @@ function yashaswi_exercise_theme($existing, $type, $theme, $path) {
  * Contains custom_events.module.
  */
 
-
 /**
  * Implements hook_user_login().
  */
@@ -58,16 +56,18 @@ function yashaswi_exercise_user_login($account) {
   $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
 }
 
+/**
+ * Attachments alter.
+ */
 function yashaswi_exercise_page_attachments_alter(array &$attachments) {
   $route_match = \Drupal::routeMatch();
   $route_name = $route_match->getRouteName();
-
 
   if ($route_name === 'comment.admin') {
     $attachments['#attached']['library'][] = 'yashaswi_exercise/css_lib';
 
   }
-  elseif($route_name=='entity.node.canonical'){
+  elseif ($route_name == 'entity.node.canonical') {
     $attachments['#attached']['library'][] = 'yashaswi_exercise/css_lib';
 
   }
