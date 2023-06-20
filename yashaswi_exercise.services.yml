@@ -3,11 +3,11 @@ services: #creating a service in this yml
     class : Drupal\yashaswi_exercise\CustomService
     arguments: ['@config.factory']
 
-  custom_events_user_login:
-    class: '\Drupal\yashaswi_exercise\EventSubscriber\UserLoginSubscriber'
-    arguments: ['@messenger', '@database','@date.formatter']
-    tags:
-      - { name: 'event_subscriber' }
+  # custom_events_user_login:
+  #   class: '\Drupal\yashaswi_exercise\EventSubscriber\UserLoginSubscriber'
+  #   arguments: ['@messenger', '@database','@date.formatter']
+  #   tags:
+  #     - { name: 'event_subscriber' }
 
 
   custom_drush.command:

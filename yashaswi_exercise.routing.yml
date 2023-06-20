@@ -35,10 +35,10 @@ yashaswi_exercise.form:
 yashaswi_exercise.title:
   path: '/node/{node}/title'
   defaults:
-    _controller: '\Drupal\quick_node_clone\Controller\NewNodeController::getNode'
-    _title_callback: '\Drupal\quick_node_clone\Controller\NewNodeController::getPageTitle'
+    _controller: '\Drupal\yashaswi_exercise\Controller\NewNodeController::getNode'
+    _title_callback: '\Drupal\yashaswi_exercise\Controller\NewNodeController::getPageTitle'
   requirements:
-    _custom_access: '\Drupal\quick_node_clone\Controller\NodeAccess::getNode'
+    _custom_access: '\Drupal\yashaswi_exercise\Controller\NewNodeController::accessNode'
   options:
     _admin_route: TRUE
     parameters:
