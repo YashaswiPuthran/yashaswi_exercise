@@ -5,3 +5,11 @@ custom-user-form:
     _title: 'User Details Form'
   requirements:
     _permission: 'user details custom form permission'
+
+custom-modal-form:
+  path: '/modal-form'
+  defaults:
+    _controller: '\Drupal\custom_form\Controller\ModalController::modalForm'
+    _title: 'modal Page'
+  requirements:
+    _permission: 'access content'

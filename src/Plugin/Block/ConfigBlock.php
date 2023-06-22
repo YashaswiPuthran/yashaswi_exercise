@@ -82,12 +82,7 @@ class CustomBlockConfigBlock extends BlockBase implements ContainerFactoryPlugin
     // Get the configuration form.
     $form = \Drupal::formBuilder()->getForm('\Drupal\yashaswi_exercise\Form\ConfigForm');
 
-    // Render the form.
-    $rendered_form = \Drupal::service('renderer')->render($form);
-
-    return [
-      '#markup' => $rendered_form,
-    ];
+    return $form;
   }
 
 }

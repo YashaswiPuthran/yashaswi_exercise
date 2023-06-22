@@ -1,15 +1,18 @@
-new_lib: #defined a name for our library
-  version: 1.x #version compatible
-  css:
-    theme:
-      css/style.css: {} #path where its present
+# new_lib: #defined a name for our library
+#   version: 1.x #version compatible
+#   css:
+#     theme:
+#       css/style.css: {} #path where its present
 
-css_lib:
+# css_lib:
+#   version: 1.x
+#   css:
+#     theme:
+#       CSS/style.css: {}
+#   js:
+#     js/custom.js: {}
+
+jss_lib:
   version: 1.x
-  css:
-    theme:
-      CSS/style.css: {}
   js:
     js/custom.js: {}
-
-

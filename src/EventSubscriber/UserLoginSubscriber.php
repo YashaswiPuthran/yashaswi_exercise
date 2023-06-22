@@ -1,42 +1,44 @@
 <?php
 
+/**
+ * @file
+ */
+
 namespace Drupal\yashaswi_exercise\EventSubscriber;
 
-// use Drupal\Core\Database\Connection;
+// Use Drupal\Core\Database\Connection;
 // use Drupal\Core\Messenger\MessengerInterface;
 // use Drupal\Core\Datetime\DateFormatterInterface;
 // use Drupal\yashaswi_exercise\Event\UserLoginEvent;
-// use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
+// use Symfony\Component\EventDispatcher\EventSubscriberInterface;.
 // /**
 //  * This is for login subscriber.
 //  *
 //  * @package Drupal\yashaswi_exercise\EventSubscriber
 //  */
 // class UserLoginSubscriber implements EventSubscriberInterface {
-
-//   /**
+// /**
 //    * The database connection.
-//    *
-//    * @var \Drupal\Core\Database\Connection
-//    */
+//    *.
+/**
+ * * @var \Drupal\Core\Database\Connection .*/
+// */
 //   protected $database;
-
-//   /**
+// /**
 //    * The messenger service.
 //    *
-//    * @var \Drupal\Core\Messenger\MessengerInterface
-//    */
+/**
+ * * @var \Drupal\Core\Messenger\MessengerInterface .*/
+// */
 //   protected $messenger;
-
-//   /**
+// /**
 //    * The date formatter service.
 //    *
-//    * @var \Drupal\Core\Datetime\DateFormatterInterface
-//    */
+/**
+ * * @var \Drupal\Core\Datetime\DateFormatterInterface .*/
+// */
 //   protected $dateFormatter;
-
-//   /**
+// /**
 //    * UserLoginSubscriber constructor.
 //    *
 //    * @param \Drupal\Core\Database\Connection $database
@@ -51,8 +53,7 @@ namespace Drupal\yashaswi_exercise\EventSubscriber;
 //     $this->messenger = $messenger;
 //     $this->dateFormatter = $dateFormatter;
 //   }
-
-//   /**
+// /**
 //    * {@inheritdoc}
 //    */
 //   public static function getSubscribedEvents() {
@@ -60,8 +61,7 @@ namespace Drupal\yashaswi_exercise\EventSubscriber;
 //       UserLoginEvent::EVENT_NAME => 'onUserLogin',
 //     ];
 //   }
-
-//   /**
+// /**
 //    * Subscribe to the user login event dispatched.
 //    *
 //    * @param \Drupal\yashaswi_exercise\Event\UserLoginEvent $event
@@ -73,10 +73,8 @@ namespace Drupal\yashaswi_exercise\EventSubscriber;
 //       ->condition('ud.uid', $event->account->id())
 //       ->execute()
 //       ->fetchField();
-
-//     $this->messenger->addStatus(t('Welcome, your account was created on %created_date.', [
+// $this->messenger->addStatus(t('Welcome, your account was created on %created_date.', [
 //       '%created_date' => $this->dateFormatter->format($account_created, 'short'),
 //     ]));
 //   }
-
 // }

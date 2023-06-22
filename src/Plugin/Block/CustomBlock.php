@@ -59,10 +59,7 @@ class CustomBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public function build() {
     $form = \Drupal::formBuilder()->getForm('Drupal\yashaswi_exercise\Form\CustomForm');
 
-    $rendered_form = \Drupal::service('renderer')->render($form);
-    return [
-      '#markup' => $rendered_form,
-    ];
+    return $form;
   }
 
 }

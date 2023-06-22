@@ -1,39 +1,43 @@
 <?php
 
 /**
+ * @file
  * Implement hook_schema().
  */
 
+/**
+ * This is custom form.
+ */
 function custom_form_schema() {
-    $schema['user_details'] = [
-        'description' => 'contains user details',
-        'fields' => [
-            'id' => [
-                'description' => 'Holds the id',
-                'type' => 'serial',
-                'not null' => true,
-                'unsigned' => true,
-            ],
-            'name' => [
-                'description' => 'Username',
-                'type' => 'varchar',
-                'length' => 50,
-                'not null' => true,
-            ],
-            'mail' => [
-                'description' => 'User Email id',
-                'type' => 'varchar',
-                'length' => 50,
-                'not null' => true,
-            ],
-            'gender' => [
-                'description' => 'User Gender',
-                'type' => 'varchar',
-                'length' => 50,
-                'not null' => true,
-            ],
-        ],
-        'primary key' => ['id'],
-    ];
-    return $schema;
+  $schema['user'] = [
+    'description' => 'contains user details',
+    'fields' => [
+      'id' => [
+        'description' => 'Holds the id',
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'name' => [
+        'description' => 'Username',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ],
+      'mail' => [
+        'description' => 'User Email id',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ],
+      'gender' => [
+        'description' => 'User Gender',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  return $schema;
 }

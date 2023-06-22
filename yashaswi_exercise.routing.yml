@@ -44,3 +44,30 @@ yashaswi_exercise.title:
     parameters:
       node:
         type: entity:node
+
+yashaswi_exercise.new_form: #machine name
+  path: '/new-val' #giving path to CustomForm.php
+  defaults:
+    _form: '\Drupal\yashaswi_exercise\Form\NewForm' #defining the path
+    _title: 'New form validate ' #title given for customform
+  requirements:
+    _permission: 'access content' #permission to access published content
+
+
+yashaswi_exercise.token_form:
+  path: '/token-form' #giving path to Configform.php
+  defaults:
+    _form: '\Drupal\yashaswi_exercise\Form\TokenForm' #defining the path
+    _title: 'config token form' #title given for config form
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: TRUE
+
+address_mod.form:
+  path: '/ajaxx-form'
+  defaults:
+    _form: '\Drupal\yashaswi_exercise\Form\AjaxForm'
+    _title: 'Ajax Form'
+  requirements:
+    _permission: 'access content'

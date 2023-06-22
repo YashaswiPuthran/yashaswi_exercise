@@ -28,17 +28,12 @@ class AjaxForm extends FormBase {
 
     $form['checkbox_field'] = [
       '#type' => 'checkbox',
-      '#title' =>'Checkbox Field',
+      '#title' => 'Checkbox Field',
     ];
 
     $form['third_field'] = [
       '#type' => 'textfield',
       '#title' => 'Third Field',
-      '#states' => [
-        'invisible' => [
-          ':input[name="checkbox_field"]' => ['checked' => TRUE],
-        ],
-      ],
     ];
 
     return $form;

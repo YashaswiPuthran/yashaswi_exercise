@@ -24,34 +24,41 @@ class NewNodeController extends ControllerBase {
    */
   public function getNode(Node $node) {
     if (!empty($node)) {
-        $title = $node->getTitle();
-        return [
-            '#markup'=>$title,
-        ];
+      $title = $node->getTitle();
+      return [
+        '#markup' => $title,
+      ];
     }
     else {
-            throw new NotFoundHttpException();
+      throw new NotFoundHttpException();
     }
   }
+
+  /**
+   * This is to get page title.
+   */
   public function getPageTitle(Node $node) {
     $prepend_text = "Node of";
-    return $prepend_text.$node->getTitle();
+    return $prepend_text . $node->getTitle();
   }
 
+  /**
+   * To access Node.
+   */
   public function accessNode(AccountInterface $account, $node) {
     $node = Node::load($node);
-    $type = $node -> getType();
-    $type_id=$node->bundle();
+    $type = $node->getType();
+    $type_id = $node->bundle();
     if ($account->hasPermission("clone $type_id perm")) {
-        $result = AccessResult::allowed();
+      $result = AccessResult::allowed();
     }
     else {
-        $result = AccessResult::forbidden();
+      $result = AccessResult::forbidden();
     }
 
-        $result->addCacheableDependency($node);
+    $result->addCacheableDependency($node);
 
     return $result;
   }
-    }
 
+}
