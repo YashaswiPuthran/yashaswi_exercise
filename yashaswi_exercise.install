@@ -58,11 +58,11 @@ function yashaswi_exercise_schema() {
 /**
  * Function.
  */
-function yashaswi_exercise_update_100305() {
-  $config = \Drupal::configFactory()->getEditable('yashaswi_exercise.settings');
-  $config->set('name', 'YASHASWI');
-  $config->save();
-}
+// function yashaswi_exercise_update_100305() {
+//   $config = \Drupal::configFactory()->getEditable('yashaswi_exercise.settings');
+//   $config->set('name', 'YASHASWI');
+//   $config->save();
+// }
 
 /**
  * Function.
@@ -76,7 +76,7 @@ function yashaswi_exercise_update_100306() {
 /**
  * Implements hook_update_N().
  */
-function yashaswi_exercise_update_100307() {
+function yashaswi_exercise_update_100308() {
   // Load all article nodes.
   $query = \Drupal::entityQuery('node')
     ->accessCheck(TRUE)

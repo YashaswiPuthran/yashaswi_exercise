@@ -1,0 +1,5 @@
+new_lib: #defined a name for our library
+  version: 1.x #version compatible
+  css:
+    theme:
+      css/style.css: {} #path where its present

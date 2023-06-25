@@ -1,0 +1,4 @@
+name: 'Config Block' # name of the custom module we created
+description: 'Block module' #desc for the module
+type: module #type of the custom we are creating (profile or modules etc)
+core_version_requirement: ^9 || ^10 #version this module will be compatible with

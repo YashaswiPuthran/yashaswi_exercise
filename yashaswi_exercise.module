@@ -8,17 +8,26 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\yashaswi_exercise\Event\UserLoginEvent;
 
 /**
- * Implements hook_form_alter().
+ * This is the form alter func.
  */
-// Function yashaswi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-//   // Gets called whenever form is opened.
-//   // Calling service to call getName func from CustomService.php.
-//   $data = \Drupal::service('custom_service')->getName();
-//   // Prints the value provided in the config form.
-//   // print_r($data);
-// }
+function yashaswi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Calling theservice.
+  // Gets called whenever form is opened.
+  // Calling service to call getName func from CustomService.php.
+  $data = \Drupal::service('custom_service')->getName();
+
+  if ($form_id == "node_article_edit_form") {
+    $helptext = \Drupal::configFactory()->getEditable("custom_config_form.settings")->get("helptext");
+    // type: node object.
+    $node = \Drupal::routeMatch()->getParameter("node");
+    $token_service = \Drupal::token();
+    $hlptxt = $token_service->replace($helptext, ['node' => $node], ['clear' => TRUE]);
+    $form['#prefix'] = "<span>" . $hlptxt . "</span>";
+  }
+}
 
 /**
  * Implements hook_theme().
@@ -41,20 +50,39 @@ function yashaswi_exercise_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * @file
- * Contains custom_events.module.
- */
-
-/**
  * Implements hook_user_login().
  */
-// Function yashaswi_exercise_user_login($account) {
-//   // Instantiate our event.
-//   $event = new UserLoginEvent($account);
-// // Get the event_dispatcher service and dispatch the event.
-//   $event_dispatcher = \Drupal::service('event_dispatcher');
-//   $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
-// }.
+function yashaswi_exercise_user_login($account) {
+  // Instantiate our event.
+  $event = new UserLoginEvent($account);
+  // Triggering the event_dispatcher service and dispatch the event.
+  $event_dispatcher = \Drupal::service('event_dispatcher');
+  $event_dispatcher->dispatch($event, UserLoginEvent::EVENT_NAME);
+}
+
+/**
+ * Attachments alter.
+ */
+function yashaswi_exercise_page_attachments_alter(array &$attachments) {
+  $attachments['#attached']['library'][] = 'yashaswi_exercise/jss_lib';
+  $attachments['#attached']['drupalSettings']['yashaswi_exercise']['color_body'] = "testing";
+
+  // Calling the service.
+  $route_match = \Drupal::routeMatch();
+  // Getting the route name of the particular page.
+  $route_name = $route_match->getRouteName();
+  // print_r($route_name);exit;
+  // If the route name is same.
+  if ($route_name === 'comment.admin') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'yashaswi_exercise/css_lib';
+  }
+  // If the route name matches.
+  elseif ($route_name === 'entity.node.canonical') {
+    // Apply the css.
+    $attachments['#attached']['library'][] = 'yashaswi_exercise/css_lib';
+  }
+}
 
 /**
  * Attachments alter.
@@ -62,22 +90,9 @@ function yashaswi_exercise_theme($existing, $type, $theme, $path) {
 // Function yashaswi_exercise_page_attachments_alter(array &$attachments) {
 //   $route_match = \Drupal::routeMatch();
 //   $route_name = $route_match->getRouteName();
-// if ($route_name === 'comment.admin') {
-//     $attachments['#attached']['library'][] = 'yashaswi_exercise/css_lib';.
-// }
-//   elseif ($route_name == 'entity.node.canonical') {
-//     $attachments['#attached']['library'][] = 'yashaswi_exercise/css_lib';
+// $attachments['#attached']['library'][] = 'yashaswi_exercise/jss_lib';
+// $attachments['#attached']['drupalSettings']['yashaswi_exercise']['color_body'] = "testing";
 // }.
-
-/**
- * }
- */
-function yashaswi_exercise_page_attachments_alter(array &$attachments) {
-  $route_match = \Drupal::routeMatch();
-  $route_name = $route_match->getRouteName();
-  $attachments['#attached']['library'][] = 'yashaswi_exercise/jss_lib';
-  $attachments['#attached']['drupalSettings']['yashaswi_exercise']['color_body'] = "testing";
-}
 
 /**
  * Implements hook_entity_view().
@@ -103,7 +118,7 @@ function yashaswi_exercise_entity_view(array &$build, EntityInterface $entity, E
 }
 
 /**
- *
+ * Entity view alter function.
  */
 function yashaswi_exercise_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
   if ($entity->getEntityTypeId() == "node") {
@@ -114,18 +129,4 @@ function yashaswi_exercise_entity_view_alter(array &$build, EntityInterface $ent
     ];
   }
 
-}
-
-/**
- * Implements hook_form_alter().
- */
-function yashaswi_exercise_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == "node_article_edit_form") {
-    $helptext = \Drupal::configFactory()->getEditable("custom_config_form.settings")->get("helptext");
-    // type: node object.
-    $node = \Drupal::routeMatch()->getParameter("node");
-    $token_service = \Drupal::token();
-    $hlptxt = $token_service->replace($helptext, ['node' => $node], ['clear' => TRUE]);
-    $form['#prefix'] = "<span>" . $hlptxt . "</span>";
-  }
 }
