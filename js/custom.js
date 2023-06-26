@@ -1,3 +1,12 @@
+(function ($, Drupal) {
+
+    $.fn.datacheck = function() {
+        alert("ajax worked");
+        $("#custom_get_user_details").submit();
+    };
+
+}(jQuery, Drupal));
+
 // (function($, Drupal, drupalSettings) {
 //     Drupal.behaviors.MyModuleBehavior = {
 //         attach: function(context, settings) {

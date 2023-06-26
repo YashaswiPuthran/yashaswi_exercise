@@ -2,7 +2,7 @@
 
     $.fn.datacheck = function() {
         alert("ajax worked");
-        $("#custom-user-details-form").submit();
+        $(".form-submit").submit();
     };
 
 }(jQuery, Drupal));

@@ -9,6 +9,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\yashaswi_exercise\Event\UserLoginEvent;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
 
 /**
  * This is the form alter func.
@@ -129,4 +131,37 @@ function yashaswi_exercise_entity_view_alter(array &$build, EntityInterface $ent
     ];
   }
 
+}
+
+/**
+  * Implements hook_entity_presave().
+  */
+
+  function yashaswi_exercise_entity_presave(EntityInterface $entity) {
+    // print_r($entity->get("title")->getValue());exit;
+    $entity->set("title", "New title after using presave");
+  //exit;
+  }
+
+
+/**
+ * Entity view alter function.
+ */
+function yashaswi_exercise_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == "solr_view_" && $view->getDisplay()->display['id'] == "page_1") {
+     $view->element['#attached']['library'][] = "yashaswi_exercise/custom.js";
+    $view->setTitle("New Title");
+  }
+}
+
+/**
+* Implements hook_views_post_render().
+*/
+function yashaswi_exercise_views_post_render(ViewExecutable $view, array &$output, CachePluginBase $cache) {
+  if ($view->id() == "solr_view_" && $view->getDisplay()->display['id'] == "page_1") {
+    // print_r(array_keys($output['#rows'][0]['#rows'][0]));exit;
+    unset($output['#rows'][0]['#rows'][0]);
+    $cache->options['result_lifespan'] = 0;
+    $cache->options['output_lifespan'] = 0;
+  }
 }

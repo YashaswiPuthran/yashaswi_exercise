@@ -2,52 +2,98 @@
 
 namespace Drupal\custom_form\Form;
 
+
 use Drupal\Core\Form\FormBase;
+// To use as base class for customform.
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 
 /**
- * User details.
+ * Used for form.
  */
 class CustomUserDetails extends FormBase {
+  /**
+   * The Messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+  /**
+   * The Messenger service.
+   *
+   * @var Drupal\Core\Database\Connection
+   */
+  protected $database;
 
   /**
-   * To get form id.
+   * Constructs InviteByEmail .
+   *
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database service.
    */
-  public function getFormId() {
-    return "custom_user_details_form";
+  public function __construct(MessengerInterface $messenger, Connection $database) {
+    $this->messenger = $messenger;
+    $this->database = $database;
   }
 
   /**
-   * Building the form.
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger'),
+      $container->get('database'),
+    );
+  }
+
+  /**
+   * Undocumented function.
+   *
+   * @return void
+   *   Description for form.
+   */
+  public function getFormId() {
+    return 'custom_get_user_details';
+  }
+
+  /**
+   * Build form generates form.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['#attached']['library'][] = "custom_form/customjsform";
-    $form['username'] = [
+    $form['#attached']['library'][] = "yashaswi_exercise/jss_lib";
+    // Creating a form with fields.
+    $form['name'] = [
       '#type' => 'textfield',
-      '#title' => 'User Name',
+      '#title' => 'Name',
       '#required' => TRUE,
+      '#placeholder' => 'name',
     ];
-    $form['usermail'] = [
-      '#type' => 'email',
+    $form['mail'] = [
+      '#type' => 'textfield',
       '#title' => 'Email',
-      '#required' => TRUE,
+      '#placeholder' => 'abc@gmail.com',
+
     ];
-    $form['usergender'] = [
+    $form['gender'] = [
       '#type' => 'select',
       '#title' => 'Gender',
       '#options' => [
-        'male' => 'Male',
-        'female' => 'Female',
-        'other' => 'Other',
+          'male' => 'Male',
+          'female' => 'Female',
+          'other' => 'Other'
       ],
-    ];
+  ];
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => 'Submit',
+      '#value' => 'Save the configuration',
       '#ajax' => [
-        'callback' => '::setAjaxSubmit',
+        'callback' => '::ajaxSubmit',
       ],
     ];
 
@@ -55,33 +101,32 @@ class CustomUserDetails extends FormBase {
   }
 
   /**
-   * Ajax function.
+   * Functiom.
    */
-  public function setAjaxSubmit() {
+  public function ajaxSubmit() {
     $response = new AjaxResponse();
-    $response->addCommand(new InvokeCommand("html", 'datacheck'));
+    $response->addCommand(new InvokeCommand("#custom_get_user_details", 'datacheck'));
     return $response;
   }
 
   /**
-   * To validate form.
+   * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if (strlen($form_state->getValue('username')) < 6) {
-      $form_state->setErrorByname('username', "please make sure your username length is more than 5");
+    if (strlen($form_state->getValue('name')) < 6) {
+        $form_state->setErrorByname('name', "please make sure your username length is more than 5");
     }
-  }
+}
 
   /**
-   * Submitting function.
+   * Submit form.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    \Drupal::messenger()->addMessage("User Details Submitted Successfully");
-    $values = $form_state->getValues();
-    \Drupal::database()->insert('user')->fields([
-      'name' => $values['username'],
-      'mail' => $values['usermail'],
-      'gender' => $values['usergender'],
+    $this->messenger->addStatus("thank you for submitting the form");
+    $this->database->insert("user")->fields([
+      'name' => $form_state->getValue("name"),
+      'mail' => $form_state->getValue("mail"),
+      'gender' => $form_state->getValue("gender"),
     ])->execute();
   }
 
