@@ -71,10 +71,10 @@ function yashaswi_exercise_page_attachments_alter(array &$attachments) {
 
   // Calling the service.
   $route_match = \Drupal::routeMatch();
-  // Getting the route name of the particular page.
   $route_name = $route_match->getRouteName();
   // print_r($route_name);exit;
-  // If the route name is same.
+  // If the route name is comment.dmin
+
   if ($route_name === 'comment.admin') {
     // Apply the css.
     $attachments['#attached']['library'][] = 'yashaswi_exercise/css_lib';
