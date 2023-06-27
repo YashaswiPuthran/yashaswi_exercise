@@ -131,3 +131,4 @@ class CustomUserDetails extends FormBase {
   }
 
 }
+

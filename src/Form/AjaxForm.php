@@ -52,7 +52,7 @@ class AjaxForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
+    \Drupal::messenger()->addMessage("User Details Submitted Successfully");
   }
 
 }

@@ -76,7 +76,7 @@ class DependentForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Handle form submission if needed.
+    // Handle form submission.
   }
 
   /**
@@ -97,7 +97,7 @@ class DependentForm extends FormBase {
    * Helper function to retrieve country options.
    */
   private function getCountryValues() {
-    $query = Database::getConnection()->select('country', 'c');
+    $query = $this->database->select('country', 'c');
     $query->fields('c', ['id', 'name']);
     $result = $query->execute();
     $options = [];
@@ -115,7 +115,7 @@ class DependentForm extends FormBase {
   private function getStateValues($get_country_id) {
 
     // Fetch the states for the selected country.
-    $query = Database::getConnection()->select('state', 's');
+    $query = $this->database->select('state', 's');
     $query->fields('s', ['id', 'name']);
     $query->condition('s.country_id', $get_country_id);
     $result = $query->execute();
@@ -132,7 +132,7 @@ class DependentForm extends FormBase {
    * This is to get values.
    */
   public function getDistrictValues($get_state_id) {
-    $query = Database::getConnection()->select('district', 'd');
+    $query = $this->database->select('district', 'd');
     $query->fields('d', ['id', 'name']);
     $query->condition('d.state_id', $get_state_id);
     $result = $query->execute();

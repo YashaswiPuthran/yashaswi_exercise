@@ -1,24 +1,25 @@
-(function ($, Drupal) {
+(function($, Drupal, drupalSettings) {
+
+    // (function ($, Drupal) {
 
     $.fn.datacheck = function() {
         alert("ajax worked");
         $("#custom_get_user_details").submit();
     };
 
-}(jQuery, Drupal));
+// }(jQuery, Drupal));
 
-// (function($, Drupal, drupalSettings) {
-//     Drupal.behaviors.MyModuleBehavior = {
-//         attach: function(context, settings) {
-//             // get color_body value with "drupalSettings.mymodule.color_body"
-//             var color_body = drupalSettings.yashaswi_exercise.color_body;
-//             alert(color_body)
-//             $('body').css('background', color_body);
-//         }
-//     };
-// })(jQuery, Drupal, drupalSettings);
 
-(function ($) {
+    Drupal.behaviors.MyModuleBehavior = {
+        attach: function(context, settings) {
+            // get color_body value with "drupalSettings.mymodule.color_body"
+            var color_body = drupalSettings.yashaswi_exercise.color_body;
+            alert(color_body)
+            $('body').css('background', color_body);
+        }
+    };
+
+// (function ($) {
     $(document).ready(function () {
         var $permanentAdd = $('#same-as-permanent');
         var $tempAdd = $('.form-item-temporary-address');
@@ -33,4 +34,7 @@
         }
         });
     });
-})(jQuery);
+// })(jQuery);
+
+
+} (jQuery, Drupal, drupalSettings));
