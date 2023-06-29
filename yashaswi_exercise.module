@@ -133,15 +133,15 @@ function yashaswi_exercise_entity_view_alter(array &$build, EntityInterface $ent
 
 }
 
-// /**
-//   * Implements hook_entity_presave().
-//   */
+/**
+  * Implements hook_entity_presave().
+  */
 
-//   function yashaswi_exercise_entity_presave(EntityInterface $entity) {
-//     // print_r($entity->get("title")->getValue());exit;
-//     $entity->set("title", "New title after using presave");
-//   //exit;
-//   }
+  function yashaswi_exercise_entity_presave(EntityInterface $entity) {
+    // print_r($entity->get("title")->getValue());exit;
+    $entity->set("title", "New title after using presave");
+  //exit;
+  }
 
 
 /**
@@ -168,5 +168,5 @@ function yashaswi_exercise_views_post_render(ViewExecutable $view, array &$outpu
 
 // function yashaswi_exercise_node_presave($node) {
 //   print_r($node->getCacheTags());
-//   print_r($node->getCacheContext());exit;
+//   print_r($node->getCacheContexts());exit;
 //   }
