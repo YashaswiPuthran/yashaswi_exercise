@@ -6,11 +6,19 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Database\Connection;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * For custom form.
  */
 class CustomForm extends FormBase {
+
+  /**
+   * The Messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
 
   /**
    * The database connection.
@@ -27,6 +35,7 @@ class CustomForm extends FormBase {
    */
   public function __construct(Connection $database) {
     $this->database = $database;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -34,6 +43,7 @@ class CustomForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('messenger'),
       $container->get('database')
     );
   }
