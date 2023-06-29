@@ -1,7 +1,0 @@
-ajax_module.form:
-  path: '/ajax-form'
-  defaults:
-    _form: '\Drupal\ajax_module\Form\AjaxForm'
-    _title: 'Ajax Form'
-  requirements:
-    _permission: 'access content'
