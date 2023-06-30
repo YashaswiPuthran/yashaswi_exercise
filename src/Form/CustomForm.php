@@ -33,7 +33,7 @@ class CustomForm extends FormBase {
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
    */
-  public function __construct(Connection $database) {
+  public function __construct(MessengerInterface $messenger, Connection $database) {
     $this->database = $database;
     $this->messenger = $messenger;
   }
