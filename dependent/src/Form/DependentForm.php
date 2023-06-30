@@ -4,12 +4,40 @@ namespace Drupal\dependent\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Connection;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * This is form.
  */
 class DependentForm extends FormBase {
+
+  /**
+   * The Messenger service.
+   *
+   * @var Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * Constructs InviteByEmail .
+   *
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database service.
+   */
+  public function __construct(Connection $database) {
+    $this->database = $database;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('database'),
+    );
+  }
+
 
   /**
    * {@inheritdoc}
@@ -67,6 +95,11 @@ class DependentForm extends FormBase {
       '#suffix' => '</div>',
       '#empty_option' => $this->t('- Select -'),
       '#disabled' => FALSE,
+    ];
+
+    $form['submit'] = [
+      '#type' => 'submit',
+      '#value' => 'Submit',
     ];
 
     return $form;
